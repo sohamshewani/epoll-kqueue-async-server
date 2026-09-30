@@ -1,0 +1,27 @@
+#include <iostream>
+#include "include/config.h"
+#include "include/event_handler.h"
+#include "include/connection_pool.h"
+#include "include/log.h"
+#include "include/utils.h"
+
+int main() {
+    Log::Init();
+    Config config;
+    config.LoadConfig();
+
+    ConnectionPool pool;
+    pool.Init();
+
+    EventHandler handler(pool);
+    handler.Start();
+
+    std::cout << "Server started. Waiting for connections..." << std::endl;
+
+    // Keep the main thread alive
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+
+    return 0;
+}

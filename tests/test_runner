@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Compile the application
+make
+
+# Run the application
+./epoll-kqueue-async-server
